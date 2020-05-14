@@ -6,7 +6,6 @@ const MONTHS_IN_YEAR = 12
 const INFURA_PROVIDER = 'https://mainnet.infura.io/v3/'
 
 export {
-    ISA_PERCENTAGE_DECIMALS,
     INFURA_PROVIDER,
     MILLISECONDS,
     SECONDS_IN_DAY,

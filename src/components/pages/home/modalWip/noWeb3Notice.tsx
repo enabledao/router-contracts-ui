@@ -2,8 +2,10 @@
 
 import React from 'react'
 import { ModalWipWrapper } from './styled'
+import getWeb3 from '../../../../utils/getWeb3'
 
 const NoWeb3Notice: React.FC = () => {
+    getWeb3()
     return (
         <React.Fragment>
             <h4>⌛ Waiting to connect to Ethereum ⌛</h4>

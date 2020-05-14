@@ -23,7 +23,4 @@ function mapState(state) {
     return { networkId: state.networkId }
 }
 
-export default connect(
-    mapState,
-    {}
-)(ModalWip)
+export default connect(mapState, {})(ModalWip)

@@ -1,5 +1,5 @@
 {
-    "name": "enable-ui",
+    "name": "router-contracts-ui",
     "version": "0.1.2",
     "private": true,
     "peerDependencies": {},

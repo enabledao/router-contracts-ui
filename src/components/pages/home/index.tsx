@@ -1,6 +1,7 @@
 import React from 'react'
 import { withNavbarAndFooter } from '../../hoc'
 import ModalWip from './modalWip'
+import Forms from './form'
 import { getDeployedFromConfig } from '../../../utils/getDeployed'
 import contractAddresses from '../../../config/router'
 import { getBlock } from '../../../utils/web3Utils'
@@ -24,7 +25,11 @@ class Home extends React.Component<{}, HomeState> {
     }
 
     render() {
-        return <React.Fragment></React.Fragment>
+        return (
+            <React.Fragment>
+                <Forms />
+            </React.Fragment>
+        )
     }
 }
 

@@ -6,6 +6,7 @@ import Button from './button'
 import RowButton from './rowButton'
 import Checkbox from './checkbox'
 import TextField from './textfield'
+import Dropdown from './dropdown'
 import Progress from './progress'
 import Spinner from './spinner'
 import ShowModal from './modal'
@@ -22,6 +23,7 @@ export {
     Row,
     Col,
     Button,
+    Dropdown,
     TextField,
     ShowModal,
     Breadcrumb,

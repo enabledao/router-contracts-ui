@@ -9,7 +9,15 @@ import {
     getIncomeSharePercentage,
     getLoanPeriod,
 } from '../../../../utils/metadata'
-import { TableTitle, FormTitle, FormTitleWrapper, FormWrapper } from './styled'
+import {
+    AmountFieldsWrapper,
+    AmountTextField,
+    TableTitle,
+    FormTitle,
+    FormTitleWrapper,
+    FormWrapper,
+    InputLabel,
+} from './styled'
 import {
     Spinner,
     Row,
@@ -32,7 +40,7 @@ export interface FormState {}
 
 class FormPage extends React.Component<{}, FormState> {
     state = {
-        currency: '',
+        currency: 'DAI',
     }
 
     componentDidMount = async () => {
@@ -44,43 +52,86 @@ class FormPage extends React.Component<{}, FormState> {
 
         return (
             <React.Fragment>
-                <FormTitleWrapper>
-                    <FormTitle>Distribute funds</FormTitle>
-                </FormTitleWrapper>
                 <FormWrapper>
                     <Form
                         onSubmit={() => {}}
                         decorators={[focusOnErrors]}
                         render={({ handleSubmit }) => (
                             <form onSubmit={handleSubmit}>
-                                <h5>I want to distribute:</h5>
                                 <Margin top={40}>
-                                    <h6>Investment Amount</h6>
                                     <Field
                                         name="currency"
                                         type="text"
                                         // validate={mustBeNumber}
                                         render={({ input, meta }) => (
                                             <React.Fragment>
-                                                <Dropdown
-                                                    // label="Investment Amount"
-                                                    placeholder="e.g. 100"
-                                                    autoFocus={true}
-                                                    value={currency}
-                                                    options={[
-                                                        'We',
-                                                        'are',
-                                                        'the',
-                                                        'champion',
-                                                    ]}
-                                                    onChange={(currency) =>
-                                                        this.setState({
-                                                            currency,
-                                                        })
-                                                    }
-                                                    // {...input}
-                                                    {...meta}
-                                                />
+                                                <InputLabel>
+                                                    I want to distribute:
+                                                </InputLabel>
+                                                <AmountFieldsWrapper>
+                                                    <Dropdown
+                                                        placeholder=" -- "
+                                                        autoFocus={true}
+                                                        value={currency}
+                                                        options={[
+                                                            'DAI',
+                                                            'USDT',
+                                                        ]}
+                                                        onChange={(e) => {
+                                                            this.setState({
+                                                                currency:
+                                                                    e.target
+                                                                        .value,
+                                                            })
+                                                        }}
+                                                        wrapperProps={{
+                                                            style: {
+                                                                borderTopRightRadius:
+                                                                    '0px',
+                                                                borderBottomRightRadius:
+                                                                    '0px',
+                                                            },
+                                                        }}
+                                                        // {...input}
+                                                        {...meta}
+                                                    />
+                                                    <Field
+                                                        name="amount"
+                                                        type="number"
+                                                        // validate={mustBeNumber}
+                                                        render={({
+                                                            input,
+                                                            meta,
+                                                        }) => (
+                                                            <React.Fragment>
+                                                                <AmountTextField
+                                                                    placeholder="e.g. 100"
+                                                                    autoFocus={
+                                                                        true
+                                                                    }
+                                                                    value={700}
+                                                                    onChange={() => {}}
+                                                                    style={{
+                                                                        textAlign:
+                                                                            'right',
+                                                                        paddingRight:
+                                                                            '32px',
+                                                                    }}
+                                                                    // {...input}
+                                                                    {...meta}
+                                                                />
+                                                                {meta.touched &&
+                                                                    meta.error && (
+                                                                        <FieldError>
+                                                                            {
+                                                                                meta.error
+                                                                            }
+                                                                        </FieldError>
+                                                                    )}
+                                                            </React.Fragment>
+                                                        )}
+                                                    />
+                                                </AmountFieldsWrapper>
                                                 {meta.touched && meta.error && (
                                                     <FieldError>
                                                         {meta.error}
@@ -89,33 +140,6 @@ class FormPage extends React.Component<{}, FormState> {
                                             </React.Fragment>
                                         )}
                                     />
-
-                                    <Field
-                                        name="amount"
-                                        type="number"
-                                        // validate={mustBeNumber}
-                                        render={({ input, meta }) => (
-                                            <React.Fragment>
-                                                <TextField
-                                                    // label="Investment Amount"
-                                                    placeholder="e.g. 100"
-                                                    autoFocus={true}
-                                                    value={700}
-                                                    onChange={() => {}}
-                                                    // {...input}
-                                                    {...meta}
-                                                />
-                                                {meta.touched && meta.error && (
-                                                    <FieldError>
-                                                        {meta.error}
-                                                    </FieldError>
-                                                )}
-                                            </React.Fragment>
-                                        )}
-                                    />
-                                    <Margin top={5}>
-                                        <small>Minimum 10 Dai</small>
-                                    </Margin>
                                 </Margin>
                                 <Margin top={32} bottom={32}>
                                     <Field
@@ -123,8 +147,8 @@ class FormPage extends React.Component<{}, FormState> {
                                         validate={() => {}}
                                         render={({ input, meta }) => (
                                             <React.Fragment>
+                                                <InputLabel>to:</InputLabel>
                                                 <TextField
-                                                    label="Name"
                                                     placeholder="Enter your name"
                                                     autoFocus={true}
                                                     {...input}
@@ -134,82 +158,6 @@ class FormPage extends React.Component<{}, FormState> {
                                                     <FieldError>
                                                         {meta.error}
                                                     </FieldError>
-                                                )}
-                                            </React.Fragment>
-                                        )}
-                                    />
-                                </Margin>
-                                <Margin bottom={32}>
-                                    <Field
-                                        name="email"
-                                        validate={() => {}}
-                                        render={({ input, meta }) => (
-                                            <React.Fragment>
-                                                <TextField
-                                                    type="email"
-                                                    label="Email"
-                                                    placeholder="Enter your email"
-                                                    {...input}
-                                                    {...meta}
-                                                />
-                                                {meta.touched && meta.error && (
-                                                    <FieldError>
-                                                        {meta.error}
-                                                    </FieldError>
-                                                )}
-                                            </React.Fragment>
-                                        )}
-                                    />
-                                </Margin>
-                                <Margin top={24}>
-                                    <b>
-                                        <p>Disclaimers:</p>
-                                    </b>
-                                </Margin>
-                                <Margin vertical={16}>
-                                    <Field
-                                        name="tac"
-                                        type="checkbox"
-                                        validate={() => {}}
-                                        render={({ input, meta }) => (
-                                            <React.Fragment>
-                                                <Checkbox
-                                                    id="tac"
-                                                    label="I have read the terms and conditions of this loan"
-                                                    {...input}
-                                                    {...meta}
-                                                />
-                                                {meta.touched && meta.error && (
-                                                    <Padding left={24}>
-                                                        <FieldError>
-                                                            {meta.error}
-                                                        </FieldError>
-                                                    </Padding>
-                                                )}
-                                            </React.Fragment>
-                                        )}
-                                    />
-                                </Margin>
-                                <Margin vertical={16}>
-                                    <Field
-                                        name="risk"
-                                        type="checkbox"
-                                        validate={() => {}}
-                                        render={({ input, meta }) => (
-                                            <React.Fragment>
-                                                <Checkbox
-                                                    id="risk"
-                                                    name="risk"
-                                                    label="I acknowledge the risks of this experiment"
-                                                    {...input}
-                                                    {...meta}
-                                                />
-                                                {meta.touched && meta.error && (
-                                                    <Padding left={24}>
-                                                        <FieldError>
-                                                            {meta.error}
-                                                        </FieldError>
-                                                    </Padding>
                                                 )}
                                             </React.Fragment>
                                         )}
@@ -235,7 +183,7 @@ class FormPage extends React.Component<{}, FormState> {
                                                 {transacting ? (
                                                     <Spinner size="20" />
                                                 ) : (
-                                                    'Place my Investment'
+                                                    'Send Tokens'
                                                 )}
                                             </Button>
                                         </Margin>

@@ -1,5 +1,26 @@
 import styled from 'styled-components'
 import { MaxWidth } from '../../../../styles/utils'
+import { TextField } from '../../../lib'
+
+const AmountFieldsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+`
+const AmountWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+`
+const AmountTextField = styled(TextField)`
+    display: flex;
+    flex-direction: row;
+    columns: 2;
+    border: 1px solid black;
+    border-left-width: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+`
 
 const HeroContent = styled.div`
     background-color: white;
@@ -76,7 +97,7 @@ const FormTitle = styled.h4`
 `
 
 const FormWrapper = styled.div`
-    width: calc(100% / 3);
+    width: calc(100% / 2);
     margin: 0 auto;
     display: block;
     vertical-align: top;
@@ -103,7 +124,16 @@ const WebViewH5 = styled.h5`
   `}
 `
 
+const InputLabel = styled.label`
+    display: block;
+    margin-bottom: 16px;
+    font-size: 16px;
+`
+
 export {
+    AmountFieldsWrapper,
+    AmountWrapper,
+    AmountTextField,
     BoldDetails,
     HeroContent,
     BoxStats,
@@ -115,5 +145,6 @@ export {
     FormTitle,
     FormTitleWrapper,
     FormWrapper,
+    InputLabel,
     WebViewH5,
 }

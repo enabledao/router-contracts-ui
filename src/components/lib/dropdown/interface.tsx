@@ -10,6 +10,7 @@ export interface DropdownProps {
     options?: (string | number)[]
     onChange?: any
     onChangeCustom?: any
+    wrapperProps?: any
 }
 
 export interface WrapperProps {
